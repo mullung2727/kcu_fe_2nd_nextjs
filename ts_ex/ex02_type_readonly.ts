@@ -31,4 +31,4 @@ const user: UserProfile = {
 };
 
 user.name = "Lee";    // OK
-user.id = 2000;       // 오류 발생
+// user.id = 2000;       // 오류 발생

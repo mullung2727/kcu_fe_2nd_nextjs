@@ -10,9 +10,9 @@ const unknownVal:unknown = 10
 // age = anything;
 // age = unknownVal
 
-function add(a:number, b:number): number {
-  return 10
-}
+// function add(a:number, b:number): number {
+//   return 10
+// }
 
 const great = (name:string):void => {
   console.log("hello, " + name)

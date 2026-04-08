@@ -165,3 +165,13 @@ export const POKEMON_TYPES = {
     displayName: "Normal"
   }
 };
+
+export type PokemonTypeKey = keyof typeof POKEMON_TYPES;
+
+export const getTypeConfig = (typeName:PokemonTypeKey) => {
+  return POKEMON_TYPES[typeName]
+}
+
+export const getAllTypeNames = () => {
+  return Object.keys(POKEMON_TYPES)
+}
