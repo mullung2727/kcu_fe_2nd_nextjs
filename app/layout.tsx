@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter, Raleway, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { NextThemeProvider } from "@/components/ThemeProvider";
+// import { NextThemeProvider } from "@/components/ThemeProvider";
 import { Navigation } from "@/components/Navigation";
+import { ThemeProvider } from "next-themes";
 
 const dmSansHeading = DM_Sans({subsets:['latin'],variable:'--font-heading'});
 
@@ -38,7 +39,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col"
         suppressHydrationWarning
       >
-        <NextThemeProvider
+        <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
@@ -46,7 +47,7 @@ export default function RootLayout({
         >
           <Navigation/>
           {children}
-        </NextThemeProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
