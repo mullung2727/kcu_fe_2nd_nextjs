@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { FaMoon, FaSun } from "react-icons/fa6";
 import Link from "next/link";
+import LoginButton from "./LoginButton";
 
 export function Navigation() {
   const {theme, setTheme} = useTheme();
@@ -28,17 +29,21 @@ export function Navigation() {
         </div>
         <div className="flex gap-4">
           {mounted && 
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={()=>setTheme(theme==='dark' ? 'light' : 'dark')}
-            >
-              { theme === 'dark' ? (
-                <FaSun className="text-yellow-500"/>
-              ) : (
-                <FaMoon className="text-yellow-500"/>
-              )}
-            </Button>
+            <>
+              <LoginButton />
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={()=>setTheme(theme==='dark' ? 'light' : 'dark')}
+              >
+                { theme === 'dark' ? (
+                  <FaSun className="text-yellow-500"/>
+                ) : (
+                  <FaMoon className="text-yellow-500"/>
+                )}
+              </Button>
+            </>
+
           }
         </div>
       </div>
