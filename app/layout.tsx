@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Navigation } from "@/components/Navigation";
 import { ThemeProvider } from "next-themes";
 import AuthProvider from "@/components/AuthProvider";
+import { UserInfoProvider } from "@/contexts/UserInfoContext";
 
 const dmSansHeading = DM_Sans({subsets:['latin'],variable:'--font-heading'});
 
@@ -47,8 +48,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <AuthProvider>
-            <Navigation/>
-            {children}
+            <UserInfoProvider>
+              <Navigation/>
+              {children}
+            </UserInfoProvider>
           </AuthProvider>
         </ThemeProvider>
       </body>
