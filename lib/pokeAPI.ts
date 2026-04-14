@@ -51,3 +51,28 @@ export async function getPokemon(id:string): Promise<PokemonProps> {
     throw err;
   }
 } 
+
+export async function getPokemonByType(typeName:string):Promise<number[]> {
+  const res = await fetch(`https://pokeapi.co/api/v2/type/${typeName}`, {
+    next: {revalidate: 86400} // 24시간
+  })
+  if(!res.ok) return []
+
+  const data = await res.json();
+  return data.pokemon.map( (p:{pokemon:{url:string}}) => {
+    const id = parseInt(p.pokemon.url.split("/")[6])
+    return id
+  } ).filter((id:number)=> id <= 1025)
+}
+
+export async function getPokemonByTypes(types: string[]): Promise<number[]> {
+  if (types.length === 0) {
+    return []
+  }
+  const result = await Promise.all(
+    types.map(type=>getPokemonByType(type))
+  )
+
+  const set = new Set(result.flat())
+  return [...set].sort((a,b)=>a-b)
+}
