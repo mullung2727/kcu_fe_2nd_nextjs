@@ -1,0 +1,28 @@
+import { getPokemon, PokemonProps } from "@/lib/pokeAPI";
+import { useEffect, useState } from "react";
+import { PokemonSkeleton } from "./PokemonCardSkeleton";
+import PokemonCard from "./PokemonCard";
+
+export default function PokemonItem({id}:{id:number}) {
+  const [pokemon, setPokemon] = useState<PokemonProps | null>(null);
+  const [loading, setLoading] = useState(true)
+
+  useEffect(()=>{
+    const fetchPokemon = async () => {
+      try {
+        const data = await getPokemon(String(id))
+        setPokemon(data)
+      } catch(err) {
+        console.error(`Failed to fetch pokemon ${id}: ${err}`)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchPokemon()
+  }, [])
+
+  if (loading || !pokemon) {
+    return <PokemonSkeleton/>
+  }
+  return <PokemonCard id={String(id)} pokemon={pokemon} />
+}
